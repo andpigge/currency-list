@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 
 import { fetcher } from "../shared/fetcher";
 import { initGet } from "../shared/constants/response-init";
+import { CurrencyList } from './currency-list';
 
 export const App = () => {
   const [currencyAll, setCurrencyAll] = useState([]);
@@ -35,12 +36,6 @@ export const App = () => {
     });
   };
 
-  const sortByCharCode = (array) => {
-    return array.sort((a, b) => {
-      return a.CharCode.localeCompare(b.CharCode);
-    });
-  };
-
   useEffect(() => {
     if (currencyAll.length === 10) {
       setCurrencyAll(sortByDate(currencyAll));
@@ -49,14 +44,6 @@ export const App = () => {
   }, [currencyAll]);
 
   return (
-    <div>
-      {sortByCharCode(Object.values(currencyToday)).map((item) => {
-        return (
-          <p key={item.ID}>
-            {item.CharCode} - {(item.Value / item.Nominal).toFixed(3)} руб
-          </p>
-        );
-      })}
-    </div>
+    <CurrencyList currencyToday={currencyToday} />
   );
 }
