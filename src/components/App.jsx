@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 
 import { fetcher } from "../shared/fetcher";
 import { initGet } from "../shared/constants/response-init";
+import { sortByDate } from "../shared/helpers/sortArray";
 import { CurrencyList } from './currency-list';
 
 export const App = () => {
@@ -29,12 +30,6 @@ export const App = () => {
 
     getCurrency(initGet);
   }, []);
-
-  const sortByDate = (array) => {
-    return array.sort((a, b) => {
-      return new Date(b.Date) - Date(a.Date);
-    });
-  };
 
   useEffect(() => {
     if (currencyAll.length === 10) {
