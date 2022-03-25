@@ -1,0 +1,7 @@
+.main {
+	min-height: 100vh;
+}
+
+.main__margin-auto {
+	margin: 0 auto;
+}

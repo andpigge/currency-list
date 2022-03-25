@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 
+import "./app.css";
 import { fetcher } from "../shared/fetcher";
 import { initGet } from "../shared/constants/response-init";
 import { sortByDate } from "../shared/helpers/sortArray";
@@ -39,6 +40,8 @@ export const App = () => {
   }, [currencyAll]);
 
   return (
-    <CurrencyList currencyToday={currencyToday} />
+    <main className='main'>
+      <CurrencyList currencyToday={currencyToday} />
+    </main>
   );
 }
