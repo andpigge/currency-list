@@ -4,8 +4,8 @@ export const sortByDate = (array) => {
   });
 };
 
-export const sortByCharCode = (array) => {
+export const sortArray = (array, value) => {
   return array.sort((a, b) => {
-    return a.CharCode.localeCompare(b.CharCode);
+    return a[value].localeCompare(b[value]);
   });
 };
