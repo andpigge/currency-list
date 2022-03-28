@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import "./app.css";
 import { fetcher } from "../shared/fetcher";
 import { initGet } from "../shared/constants/response-init";
+import { CurrencyList } from './currency-list';
 import { CurrencyProvider } from "./currency.context";
 import { sortArray } from "../shared/helpers/sortArray";
 
@@ -85,10 +86,9 @@ export const App = () => {
     <main className="main">
       {
         <>
+          <h1>{currencyAll[0] && currencyAll[0][0]}</h1>
           <CurrencyProvider value={currencyToday}>
-            <h1>
-              1
-            </h1>
+            <CurrencyList />
           </CurrencyProvider>
         </>
       }
