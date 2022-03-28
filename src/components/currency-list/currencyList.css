@@ -9,3 +9,11 @@
 	padding: 0;
 	list-style: none;
 }
+
+.currency__item_background_selected {
+	transition: .2s ease-out;
+}
+
+.currency__item_background_selected:hover {
+	background-color: silver;
+}

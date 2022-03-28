@@ -20,7 +20,7 @@ export const CurrencyList = () => {
         </div>
         {value.map((item) => {
           return (
-            <li className="currency__item" key={item.id}>
+            <li className="currency__item currency__item_background_selected" key={item.id}>
               <CurrencyItem currency={item}/>
             </li>
           );
