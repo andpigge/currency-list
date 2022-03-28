@@ -3,45 +3,59 @@ import { useState, useEffect } from "react";
 import "./app.css";
 import { fetcher } from "../shared/fetcher";
 import { initGet } from "../shared/constants/response-init";
-import { sortByDate } from "../shared/helpers/sortArray";
-import { CurrencyList } from './currency-list';
+import { sortArray } from "../shared/helpers/sortArray";
 
 export const App = () => {
-  const [currencyAll, setCurrencyAll] = useState([]);
-  const [currencyToday, setCurrencyToday] = useState({});
+  const [currencyToday, setCurrencyToday] = useState([]);
 
+  const createNewArr = (obj, cb) => {
+    const newArr = [];
+    for (let key in obj) {
+      const newObj = cb(key);
+      newArr.push(newObj);
+    }
+    return newArr;
+  };
+
+  // TODO Создать функцию помошник для вычисления даты
   useEffect(() => {
     let count = 0;
 
     const getCurrency = (initGet) => {
-      fetcher(initGet)
-      .then((json) => {
-        setCurrencyAll((state) => {
-          const newState = state.slice(0);
-          newState.push(json);
-          return newState;
-        });
+      fetcher(initGet).then((json) => {
         count++;
+
+        if (count === 1) {
+          const newArr = createNewArr(json.Valute, (key) => {
+            const obj = json.Valute[key];
+            const percent = `${((obj.Previous / obj.Value) * 100 - 100).toFixed(
+              3
+            )}`;
+            return {
+              id: obj.ID,
+              charCode: obj.CharCode,
+              name: obj.Name,
+              value: obj.Value.toFixed(3),
+              percent,
+              selected: false,
+              growth: obj.Value < obj.Previous,
+            };
+          });
+          setCurrencyToday(sortArray(newArr, "charCode"));
+        }
 
         if (count < 10) {
           return getCurrency({ ...initGet, path: json.PreviousURL });
         }
-      })
+      });
     };
 
     getCurrency(initGet);
   }, []);
 
-  useEffect(() => {
-    if (currencyAll.length === 10) {
-      setCurrencyAll(sortByDate(currencyAll));
-      setCurrencyToday(currencyAll[0].Valute);
-    }
-  }, [currencyAll]);
-
   return (
-    <main className='main'>
-      <CurrencyList currencyToday={currencyToday} />
+    <main className="main">
+      <h1>1</h1>
     </main>
   );
-}
+};
