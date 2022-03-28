@@ -79,13 +79,28 @@ export const App = () => {
     getCurrency(initGet);
   }, []);
 
+  const toggleSelected = (item) => {
+    const newState = currencyToday.reduce((acc, i) => {
+      if (i.id === item.id) {
+        i.selected = !i.selected;
+      }
+      else if (i.selected === true) {
+        i.selected = false;
+      }
+      acc.push(i);
+      return acc;
+    }, []);
+
+    setCurrencyToday(newState);
+  };
+
   return (
     <main className="main">
       {
         <>
           <h1>2022-03-26</h1>
           <CurrencyProvider value={currencyToday}>
-            <CurrencyList />
+            <CurrencyList cb={toggleSelected} />
           </CurrencyProvider>
         </>
       }

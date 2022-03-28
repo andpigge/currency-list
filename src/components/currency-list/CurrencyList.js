@@ -1,10 +1,10 @@
 import { CurrencyItem } from "./currency-item";
 import { useCurrency } from "../currency.context";
 import "./currencyList.css";
+import React from 'react';
 
-export const CurrencyList = () => {
+export const CurrencyList = ({ cb }) => {
   const value = useCurrency();
-  console.log(value);
 
   return (
     <section className="currency main__margin-auto">
@@ -20,9 +20,15 @@ export const CurrencyList = () => {
         </div>
         {value.map((item) => {
           return (
-            <li className="currency__item currency__item_background_selected" key={item.id}>
-              <CurrencyItem currency={item}/>
-            </li>
+            <React.Fragment key={item.id}>
+              <li
+                className="currency__item currency__item_background_selected"
+                onClick={() => cb(item)}
+              >
+                <CurrencyItem currency={item} />
+              </li>
+              {item.selected && <h1>1</h1>}
+            </React.Fragment>
           );
         })}
       </ul>
