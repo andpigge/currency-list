@@ -1,5 +1,4 @@
 import { CurrencyAllItem } from "./currency-all-item";
-import "./currencyListAll.css";
 
 export const CurrencyListAll = ({ currencyAll, charCode }) => (
   <ul className="currency__list">

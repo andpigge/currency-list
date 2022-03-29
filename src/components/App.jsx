@@ -1,13 +1,11 @@
 import { useState, useEffect } from "react";
 
 import "./app.css";
-import { fetcher } from "../shared/fetcher";
-import { initGet } from "../shared/constants/response-init";
 import { CurrencyList } from './currency-list';
 import { CurrencyProvider } from "./currency.context";
 import { sortArray } from "../shared/helpers/sortArray";
 
-export const App = () => {
+export const App = ({ data }) => {
   const [currencyAll, setCurrencyAll] = useState([]);
   const [currencyToday, setCurrencyToday] = useState([]);
 
@@ -29,56 +27,41 @@ export const App = () => {
   };
 
   // TODO Создать функцию помошник для вычисления даты
+  // TODO Добавить еще один провайдер, контекст для все валют
   useEffect(() => {
-    let count = 0;
     const arr = [];
+    data.forEach(item => {
+      const currencyAll = createNewObj(item.Valute, (newObj, key) => {
+        const obj = item.Valute[key];
+        const percent = `${((obj.Value / obj.Previous) * 100 - 100).toFixed(3)}`;
 
-    const getCurrency = (initGet) => {
-      fetcher(initGet)
-      .then((json) => {
-        const newArr = createNewObj(json.Valute, (newObj, key) => {
-          const obj = json.Valute[key];
-          const percent = `${(obj.Value / obj.Previous * 100 - 100).toFixed(3)}`;
-
-          newObj[key] = {
-            value: obj.Value.toFixed(3),
-            id: obj.ID,
-            percent,
-            date: json.Date.slice(0, 10),
-            growth: obj.Value > obj.Previous,
-          };
-        });
-
-        arr.push(newArr);
-        count++;
-
-        if (count === 1) {
-          const newArr = createNewArr(json.Valute, (key) => {
-            const obj = json.Valute[key];
-            const percent = `${((obj.Value / obj.Previous) * 100 - 100).toFixed(3)}`;
-            return {
-              id: obj.ID,
-              charCode: obj.CharCode,
-              name: obj.Name,
-              value: obj.Value.toFixed(3),
-              percent,
-              selected: false,
-              growth: obj.Value > obj.Previous,
-            };
-          });
-          setCurrencyToday(sortArray(newArr, "charCode"));
-        }
-
-        if (count < 10) {
-          return getCurrency({ ...initGet, path: json.PreviousURL });
-        }
-
-        setCurrencyAll(arr);
+        newObj[key] = {
+          value: obj.Value.toFixed(3),
+          id: obj.ID,
+          percent,
+          date: item.Date.slice(0, 10),
+          growth: obj.Value > obj.Previous,
+        };
       });
-    };
+      arr.push(currencyAll);
 
-    getCurrency(initGet);
-  }, []);
+      const currencyToday = createNewArr(item.Valute, (key) => {
+        const obj = item.Valute[key];
+        const percent = `${((obj.Value / obj.Previous) * 100 - 100).toFixed(3)}`;
+        return {
+          id: obj.ID,
+          charCode: obj.CharCode,
+          name: obj.Name,
+          value: obj.Value.toFixed(3),
+          percent,
+          selected: false,
+          growth: obj.Value > obj.Previous,
+        };
+      });
+      setCurrencyToday(sortArray(currencyToday, "charCode"));
+    });
+    setCurrencyAll(arr);
+  }, [data]);
 
   const toggleSelected = (item) => {
     const newState = currencyToday.reduce((acc, i) => {
