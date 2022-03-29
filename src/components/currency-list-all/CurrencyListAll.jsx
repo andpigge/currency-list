@@ -1,4 +1,4 @@
-import { CurrencyAllItem } from "../ui/currency-all-item";
+import { CurrencyAllItem } from "./currency-all-item";
 import "./currencyListAll.css";
 
 export const CurrencyListAll = ({ currencyAll, charCode }) => (

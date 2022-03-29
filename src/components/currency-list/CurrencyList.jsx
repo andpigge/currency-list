@@ -1,4 +1,4 @@
-import { CurrencyItem } from "../ui/currency-item";
+import { CurrencyItem } from "./currency-item";
 import { CurrencyListAll } from "../currency-list-all";
 import { useCurrency } from "../currency.context";
 import "./currencyList.css";
