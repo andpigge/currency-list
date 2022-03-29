@@ -2,7 +2,7 @@ import { CurrencyItem } from "./currency-item";
 import { CurrencyListAll } from "../currency-list-all";
 import { useCurrency } from "../currency.context";
 import "./currencyList.css";
-import React from "react";
+import { Fragment } from "react";
 
 export const CurrencyList = ({ currencyAll, cb }) => {
   const value = useCurrency();
@@ -21,7 +21,7 @@ export const CurrencyList = ({ currencyAll, cb }) => {
         </div>
         {value.map((item) => {
           return (
-            <React.Fragment key={item.id}>
+            <Fragment key={item.id}>
               <li className="currency__item currency__item_background_selected">
                 <>
                   <CurrencyItem currency={item} cb={cb} />
@@ -33,7 +33,7 @@ export const CurrencyList = ({ currencyAll, cb }) => {
                   )}
                 </>
               </li>
-            </React.Fragment>
+            </Fragment>
           );
         })}
       </ul>

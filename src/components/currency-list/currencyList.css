@@ -33,3 +33,7 @@
 .currencyItem__desc_position_right {
 	text-align: right;
 }
+
+.currency__item {
+	position: relative;
+}

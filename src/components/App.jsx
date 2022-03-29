@@ -36,7 +36,6 @@ export const App = () => {
     const getCurrency = (initGet) => {
       fetcher(initGet)
       .then((json) => {
-        console.log(json)
         const newArr = createNewObj(json.Valute, (newObj, key) => {
           const obj = json.Valute[key];
           const percent = `${(obj.Value / obj.Previous * 100 - 100).toFixed(3)}`;
