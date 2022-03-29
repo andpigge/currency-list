@@ -10,11 +10,26 @@
 	list-style: none;
 }
 
-.currency__item_background_selected {
-	transition: .2s ease-out;
-	cursor: pointer;
+.currencyTitle {
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	gap: 16px;
+	padding: 10px 10px;
+	border-bottom: 1px solid white;
+	background-color: #242424;
 }
 
-.currency__item_background_selected:hover {
-	background-color: silver;
+.currencyTitle__desc {
+	font-family: 'Roboto Slab';
+	font-size: 16px;
+	margin: 0;
+	color: white;
+}
+
+.currencyItem__desc_position_center {
+	text-align: center;
+}
+
+.currencyItem__desc_position_right {
+	text-align: right;
 }
