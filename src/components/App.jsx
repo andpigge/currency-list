@@ -3,11 +3,14 @@ import { useState, useEffect } from "react";
 import "./app.css";
 import { CurrencyList } from './currency-list';
 import { CurrencyProvider } from "./currency.context";
+import { Title } from './title';
 import { sortArray } from "../shared/helpers/sortArray";
 
 export const App = ({ data }) => {
   const [currencyAll, setCurrencyAll] = useState([]);
   const [currencyToday, setCurrencyToday] = useState([]);
+
+  const dayMonthYear = (date, gap = '.') => date.slice(0, 10).split("-").reverse().join(gap);
 
   const createNewArr = (obj, cb) => {
     const newArr = [];
@@ -26,8 +29,7 @@ export const App = ({ data }) => {
     return newObj;
   };
 
-  // TODO Создать функцию помошник для вычисления даты
-  // TODO Добавить еще один провайдер, контекст для все валют
+  // TODO Добавить еще один провайдер, контекст для всех валют
   useEffect(() => {
     const arr = [];
     data.forEach(item => {
@@ -39,7 +41,7 @@ export const App = ({ data }) => {
           value: obj.Value.toFixed(3),
           id: obj.ID,
           percent,
-          date: item.Date.slice(0, 10),
+          date: dayMonthYear(item.Date),
           growth: obj.Value > obj.Previous,
         };
       });
@@ -82,7 +84,7 @@ export const App = ({ data }) => {
     <main className="main">
       {
         <>
-          <h1>2022-03-26</h1>
+          {data.length && <Title text={dayMonthYear(data[0].Date)} />}
           <CurrencyProvider value={currencyToday}>
             <CurrencyList currencyAll={currencyAll} cb={toggleSelected} />
           </CurrencyProvider>
