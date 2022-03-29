@@ -45,6 +45,7 @@ export const App = () => {
             id: obj.ID,
             percent,
             date: json.Date.slice(0, 10),
+            growth: obj.Value < obj.Previous,
           };
         });
 
@@ -100,7 +101,7 @@ export const App = () => {
         <>
           <h1>2022-03-26</h1>
           <CurrencyProvider value={currencyToday}>
-            <CurrencyList cb={toggleSelected} />
+            <CurrencyList cb={toggleSelected} currencyAll={currencyAll} />
           </CurrencyProvider>
         </>
       }

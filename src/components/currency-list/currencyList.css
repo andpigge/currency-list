@@ -12,6 +12,7 @@
 
 .currency__item_background_selected {
 	transition: .2s ease-out;
+	cursor: pointer;
 }
 
 .currency__item_background_selected:hover {
