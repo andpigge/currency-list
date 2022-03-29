@@ -1,4 +1,4 @@
-import { CurrencyItem } from "./currency-item";
+import { ListItem } from "../ui/list-Item";
 import { useCurrency } from "../currency.context";
 import "./currencyList.css";
 import React from "react";
@@ -27,7 +27,7 @@ export const CurrencyList = ({ cb, currencyAll }) => {
                 className="currency__item currency__item_background_selected"
                 onClick={() => cb(item)}
               >
-                <CurrencyItem currency={item} />
+                <ListItem currency={item} />
               </li>
               {item.selected && (
                 <ul className="currency__list">
@@ -54,10 +54,10 @@ export const CurrencyList = ({ cb, currencyAll }) => {
                           <p className="currencyItem__text currencyItem__text_position_right">
                             {i[item.charCode].percent} %
                             {i[item.charCode].growth ? (
-                            <span style={{ color: "green" }}>▲</span>
-                          ) : (
-                            <span style={{ color: "red" }}>▼</span>
-                          )}
+                              <span style={{ color: "green" }}>▲</span>
+                            ) : (
+                              <span style={{ color: "red" }}>▼</span>
+                            )}
                           </p>
                         </div>
                       </li>

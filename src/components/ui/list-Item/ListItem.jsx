@@ -1,6 +1,6 @@
-import "./currencyItem.css";
+import "./listItem.css";
 
-export const CurrencyItem = ({ currency }) => {
+export const ListItem = ({ currency }) => {
   const { charCode, percent, value, growth } = currency;
 
   return (
