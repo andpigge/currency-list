@@ -36,16 +36,17 @@ export const App = () => {
     const getCurrency = (initGet) => {
       fetcher(initGet)
       .then((json) => {
+        console.log(json)
         const newArr = createNewObj(json.Valute, (newObj, key) => {
           const obj = json.Valute[key];
-          const percent = `${((obj.Previous / obj.Value) * 100 - 100).toFixed(3)}`;
+          const percent = `${(obj.Value / obj.Previous * 100 - 100).toFixed(3)}`;
 
           newObj[key] = {
             value: obj.Value.toFixed(3),
             id: obj.ID,
             percent,
             date: json.Date.slice(0, 10),
-            growth: obj.Value < obj.Previous,
+            growth: obj.Value > obj.Previous,
           };
         });
 
@@ -55,7 +56,7 @@ export const App = () => {
         if (count === 1) {
           const newArr = createNewArr(json.Valute, (key) => {
             const obj = json.Valute[key];
-            const percent = `${((obj.Previous / obj.Value) * 100 - 100).toFixed(3)}`;
+            const percent = `${((obj.Value / obj.Previous) * 100 - 100).toFixed(3)}`;
             return {
               id: obj.ID,
               charCode: obj.CharCode,
@@ -63,7 +64,7 @@ export const App = () => {
               value: obj.Value.toFixed(3),
               percent,
               selected: false,
-              growth: obj.Value < obj.Previous,
+              growth: obj.Value > obj.Previous,
             };
           });
           setCurrencyToday(sortArray(newArr, "charCode"));
