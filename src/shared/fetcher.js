@@ -6,7 +6,6 @@ export const handleResponse = async (response) => {
   const data = await response.json();
 
   if (!response.ok) {
-    // TODO реализовать при возможности центральную обработку ошибок
     throw console.error("Ошибка");
   }
 

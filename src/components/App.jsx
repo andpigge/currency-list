@@ -83,7 +83,7 @@ export const App = ({ data }) => {
     <main className="main">
       {
         <>
-          {data.length && <Title text={dayMonthYear(data[0].Date)} />}
+          {data.length ? <Title text={dayMonthYear(data[0].Date)} /> : ''}
           <CurrencyProvider value={currencyAll}>
             <CurrencyList currencyToday={currencyToday} cb={toggleSelected} />
           </CurrencyProvider>
