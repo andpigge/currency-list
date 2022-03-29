@@ -29,7 +29,6 @@ export const App = ({ data }) => {
     return newObj;
   };
 
-  // TODO Добавить еще один провайдер, контекст для всех валют
   useEffect(() => {
     const arr = [];
     data.forEach(item => {
@@ -85,8 +84,8 @@ export const App = ({ data }) => {
       {
         <>
           {data.length && <Title text={dayMonthYear(data[0].Date)} />}
-          <CurrencyProvider value={currencyToday}>
-            <CurrencyList currencyAll={currencyAll} cb={toggleSelected} />
+          <CurrencyProvider value={currencyAll}>
+            <CurrencyList currencyToday={currencyToday} cb={toggleSelected} />
           </CurrencyProvider>
         </>
       }
