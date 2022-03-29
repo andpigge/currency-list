@@ -1,12 +1,15 @@
 import "./currencyItem.css";
 
-export const CurrencyItem = ({ currency }) => {
+export const CurrencyItem = ({ currency, cb }) => {
   const { charCode, percent, value, growth, selected } = currency;
 
   const classText = `currencyItem__text ${selected ? "currencyItem__text_item_selected" : ''}`;
 
   return (
-    <div className={`currencyItem ${selected && "currencyItem_item_selected"}`}>
+    <div
+      className={`currencyItem ${selected && "currencyItem_item_selected"}`}
+      onClick={() => cb(currency)}
+    >
       <p className={classText}>{charCode}</p>
       <p className={`${classText} currencyItem__text_position_center`}>
         {value} &#8381;.

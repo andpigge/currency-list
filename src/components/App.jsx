@@ -101,7 +101,7 @@ export const App = () => {
         <>
           <h1>2022-03-26</h1>
           <CurrencyProvider value={currencyToday}>
-            <CurrencyList cb={toggleSelected} currencyAll={currencyAll} />
+            <CurrencyList currencyAll={currencyAll} cb={toggleSelected} />
           </CurrencyProvider>
         </>
       }

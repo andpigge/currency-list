@@ -3,19 +3,15 @@ import "./currencyListAll.css";
 
 export const CurrencyListAll = ({ currencyAll, charCode }) => (
   <ul className="currency__list">
-    <div className="currencyTitle">
-      <p className="currencyTitle__desc">Дата</p>
-      <p className="currencyTitle__desc currencyItem__desc_position_center">
-        Текущее
-      </p>
-      <p className="currencyTitle__desc currencyItem__desc_position_right">
-        Предедущее
-      </p>
+    <div className="currencyAllItem">
+      <p className="currencyAllItem__text">Дата</p>
+      <p className="currencyAllItem__text">Текущее</p>
+      <p className="currencyAllItem__text">Предедущее</p>
     </div>
-    {currencyAll.map((item) => {
+    {currencyAll.map((item, i) => {
       const currency = item[charCode];
       return (
-        <li className="currency__item">
+        <li className="currency__item" key={currency.id + i}>
           <CurrencyAllItem
             currency={{
               date: currency.date,

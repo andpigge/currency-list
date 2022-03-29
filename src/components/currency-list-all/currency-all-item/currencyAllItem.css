@@ -1,47 +1,16 @@
-.currencyItem {
+.currencyAllItem {
 	display: grid;
 	grid-template-columns: repeat(3, 1fr);
 	gap: 16px;
-	padding: 8px 10px;
-	border-bottom: 1px solid black;
-	transition: .4s ease;
-	cursor: pointer;
+	justify-items: center;
+	padding: 10px 10px;
+	border-bottom: 1px solid white;
+	background-color: #ECEBE8;
 }
 
-.currencyItem:hover {
-	background-color: #242424;
-	border-bottom-color: white;
-}
-
-.currencyItem:hover .currencyItem__text {
-	color: #fff;
-}
-
-.currencyItem_item_selected {
-	background-color: #242424;
-	border-bottom-color: white;
-}
-
-.currencyItem_selected:hover {
-	background-color: #242424;
-}
-
-.currencyItem__text {
-	transition: .4s ease;
+.currencyAllItem__text {
 	font-family: 'Roboto Slab';
 	font-size: 16px;
 	color: #242424;
 	margin: 0;
-}
-
-.currencyItem__text_item_selected {
-	color: #fff;
-}
-
-.currencyItem__text_position_center {
-	text-align: center;
-}
-
-.currencyItem__text_position_right {
-	text-align: right;
 }
